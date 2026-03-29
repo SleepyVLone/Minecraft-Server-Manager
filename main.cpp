@@ -11,6 +11,7 @@ int main()
     string serverPath = "server.jar"; //Used if the config file is missing
 
     int ram = 2; //set RAM to 2G if the config file is missing
+    int minRam = 1; //set min RAM to 1G if the config file is missing
 
     ifstream configFile("config.txt"); //Reads the config file
     string line;
@@ -24,6 +25,7 @@ int main()
         getline(ss, value); //read the rest
 
         if (key == "ram") ram = stoi(value);
+        if (key == "min_ram") minRam = stoi(value);
         if (key == "server_path") serverPath = value;
     }
 
@@ -47,7 +49,7 @@ int main()
         {
             cout << "Starting server..." << endl;
     
-            string command = "java -Xmx" + to_string(ram) + "G -Xms1G -jar " + serverPath + " nogui";
+            string command = "java -Xmx" + to_string(ram) + "G -Xms" + to_string(minRam) + "G -jar " + serverPath + " nogui";
             system(command.c_str());
     
             cout << "Server stopped." << endl;
@@ -74,8 +76,6 @@ int main()
         {
             cout << "Selection invalid. Please make a valid selection.";
         }
-
     }
-
     return 0;
 }
