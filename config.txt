@@ -1,0 +1,3 @@
+ram=2
+min_ram=1
+server_path=server.jar
